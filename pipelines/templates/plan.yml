@@ -16,6 +16,24 @@ stages:
           clean: all
         steps:
           - task: AzureCLI@2
+            displayName: debug AzureCLI
+            inputs:
+              azureSubscription: ${{ parameters.service_connection }}
+              scriptType: bash
+              scriptLocation: scriptPath
+              scriptPath: scripts/terraform_init.sh
+              workingDirectory: $(System.DefaultWorkingDirectory)/terraform
+              addSpnToEnvironment: true
+              arguments: >
+                -backend-config="storage_account_name=${{ parameters.sa }}"
+                -backend-config="container_name=${{ parameters.container }}"
+                -backend-config="key=${{ parameters.project }}-${{ parameters.environment }}.tfstate"
+            env:
+              TF_IN_AUTOMATION: true
+              ARM_SUBSCRIPTION_ID: ${{ parameters.subscription_id }}
+              ARM_USE_AZUREAD: true
+
+          - task: AzureCLI@2
             displayName: terraform init
             inputs:
               azureSubscription: ${{ parameters.service_connection }}
@@ -66,7 +84,7 @@ stages:
                 !terraform/.terraform/**/*
               targetFolder: $(Build.StagingDirectory)
               cleanTargetFolder: true
-          
+
           - task: PublishBuildArtifacts@1
             displayName: upload tf artifact
             condition: and(succeeded(), eq(variables['plan.result'], 'changed'))
