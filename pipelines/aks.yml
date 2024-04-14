@@ -24,5 +24,6 @@ stages:
   - template: ./templates/helm.yml
     parameters:
       service_connection: $(service_connection)
+      aks_connection:     $(aks_connection)
       environment:        $(environment)
       project:            $(project)

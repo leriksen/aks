@@ -2,6 +2,7 @@ parameters:
   - name: project
   - name: environment
   - name: service_connection
+  - name: aks_connection
 
 stages:
   - stage: helm
@@ -21,3 +22,13 @@ stages:
               inlineScript: |
                 helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
               addSpnToEnvironment: true
+
+          - task: KubectlInstaller@0
+
+          - task: Kubernetes@1
+            displayName: Create a new namespace for the csi driver
+            inputs:
+              kubernetesServiceEndpoint: ${{ parameters.aks_connection }}
+              command: apply
+              useConfigurationFile: true
+              inline: '{ "kind": "Namespace", "apiVersion": "v1", "metadata": { "name": "csi-driver" }}'
