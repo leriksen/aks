@@ -17,6 +17,7 @@ stages:
             inputs:
               azureSubscription: ${{ parameters.service_connection }}
               scriptType: bash
-              scriptLocation: scriptPath
-              scriptPath: scripts/helm.sh
+              scriptLocation: inlineScript
+              inlineScript: |
+                helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
               addSpnToEnvironment: true
