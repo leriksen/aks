@@ -27,6 +27,8 @@ stages:
       environment:        $(environment)
       project:            $(project)
       subscription_id:    $(subscription_id)
+      org:                $(org)
+      pat:                $(pat)
 
   - template: ./templates/apply.yml
     parameters:
@@ -36,3 +38,5 @@ stages:
       environment:        $(environment)
       project:            $(project)
       subscription_id:    $(subscription_id)
+      org:                $(org)
+      pat:                $(pat)

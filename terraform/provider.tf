@@ -14,3 +14,5 @@ provider "azurerm" {
 }
 
 provider "azuread" {}
+
+provider "azuredevops" {}
