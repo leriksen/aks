@@ -1,7 +1,7 @@
 resource "azuredevops_serviceendpoint_kubernetes" "aks" {
   project_id            = data.azuredevops_project.aks.id
   service_endpoint_name = "aks"
-  apiserver_url         = azurerm_kubernetes_cluster.aks.fqdn
+  apiserver_url         = "https://${azurerm_kubernetes_cluster.aks.fqdn}"
   authorization_type    = "AzureSubscription"
 
   azure_subscription {
