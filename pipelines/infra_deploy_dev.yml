@@ -27,8 +27,8 @@ stages:
       environment:        $(environment)
       project:            $(project)
       subscription_id:    $(subscription_id)
-      org:                $(org_url)
-      pat:                $(pat)
+      pod1secret:         $(pod1secret)
+      pod2secret:         $(pod2secret)
 
   - template: ./templates/apply.yml
     parameters:
@@ -38,5 +38,5 @@ stages:
       environment:        $(environment)
       project:            $(project)
       subscription_id:    $(subscription_id)
-      org:                $(org_url)
-      pat:                $(pat)
+      pod1secret:         $(pod1secret)
+      pod2secret:         $(pod2secret)

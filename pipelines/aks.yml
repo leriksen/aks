@@ -1,0 +1,28 @@
+variables:
+  - group: aks-dev
+
+pool:
+  vmImage: ubuntu-22.04
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+      - main
+  paths:
+    exclude:
+      - chef/**/*
+      - pipelines/**/*
+      - terraform/**/*
+      - modules/**/*
+    include:
+      - pipelines/aks.yml
+      - scripts/**/*
+
+stages:
+  - template: ./templates/helm.yml
+    parameters:
+      service_connection: $(service_connection)
+      environment:        $(environment)
+      project:            $(project)

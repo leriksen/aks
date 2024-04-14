@@ -5,8 +5,9 @@ parameters:
   - name: project
   - name: service_connection
   - name: subscription_id
-  - name: org
-  - name: pat
+  - name: pod1secret
+  - name: pod2secret
+
 
 stages:
   - stage: terraform_apply
@@ -43,8 +44,6 @@ stages:
                     TF_IN_AUTOMATION: true
                     ARM_SUBSCRIPTION_ID: ${{ parameters.subscription_id }}
                     ARM_USE_AZUREAD: true
-                    AZDO_ORG_SERVICE_URL: ${{ parameters.org }}
-                    AZDO_PERSONAL_ACCESS_TOKEN: ${{ parameters.pat }}
 
                 - task: AzureCLI@2
                   displayName: terraform apply
@@ -59,5 +58,3 @@ stages:
                     TF_IN_AUTOMATION: true
                     ARM_SUBSCRIPTION_ID: ${{ parameters.subscription_id }}
                     ARM_USE_AZUREAD: true
-                    AZDO_ORG_SERVICE_URL: ${{ parameters.org }}
-                    AZDO_PERSONAL_ACCESS_TOKEN: ${{ parameters.pat }}

@@ -1,0 +1,22 @@
+parameters:
+  - name: project
+  - name: environment
+  - name: service_connection
+
+stages:
+  - stage: helm
+    displayName: Helm
+    jobs:
+      - job: helm
+        displayName: Helm
+        workspace:
+          clean: all
+        steps:
+          - task: AzureCLI@2
+            displayName: Helm
+            inputs:
+              azureSubscription: ${{ parameters.service_connection }}
+              scriptType: bash
+              scriptLocation: scriptPath
+              scriptPath: scripts/helm.sh
+              addSpnToEnvironment: true
