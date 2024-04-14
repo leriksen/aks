@@ -12,13 +12,13 @@ trigger:
       - main
   paths:
     exclude:
-      - chef/**/*
       - pipelines/**/*
       - terraform/**/*
       - modules/**/*
     include:
       - pipelines/aks.yml
-      - scripts/**/*
+      - pipelines/templates/helm.yml
+      - scripts/helm.sh
 
 stages:
   - template: ./templates/helm.yml

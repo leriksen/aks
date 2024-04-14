@@ -15,8 +15,9 @@ trigger:
       - main
   paths:
     exclude:
-      - chef/**/*
-      - pipelines/cluster_config.yml
+      - pipelines/aks.yml
+      - pipelines/templates/helm.yml
+      - scripts/helm.sh
 
 stages:
   - template: ./templates/plan.yml
