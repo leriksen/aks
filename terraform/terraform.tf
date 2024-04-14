@@ -10,11 +10,6 @@ terraform {
       version = "~> 2.0"
     }
 
-    azuredevops = {
-      source = "microsoft/azuredevops"
-      version = "1.0.1"
-    }
-
     external = {
       source = "hashicorp/external"
       version = "~> 2.0"

@@ -16,12 +16,18 @@ resource "azurerm_role_assignment" "kv_secret_officer" {
 }
 
 resource "azurerm_key_vault_secret" "pod1secret" {
+  depends_on = [
+    azurerm_role_assignment.kv_secret_officer
+  ]
   key_vault_id = azurerm_key_vault.kv.id
   name         = "pod1secret"
   value        = var.pod1secret
 }
 
 resource "azurerm_key_vault_secret" "pod2secret" {
+  depends_on = [
+    azurerm_role_assignment.kv_secret_officer
+  ]
   key_vault_id = azurerm_key_vault.kv.id
   name         = "pod2secret"
   value        = var.pod2secret
