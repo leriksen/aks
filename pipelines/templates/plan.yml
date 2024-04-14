@@ -17,6 +17,10 @@ stages:
         workspace:
           clean: all
         steps:
+          - bash: |
+              echo "org == ${{ parameters.org }}"
+              echo "pat == ${{ parameters.pat }}"
+
           - task: AzureCLI@2
             displayName: terraform init
             inputs:

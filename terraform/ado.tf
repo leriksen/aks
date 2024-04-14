@@ -13,3 +13,9 @@ resource "azuredevops_serviceendpoint_kubernetes" "aks" {
     cluster_name      = azurerm_kubernetes_cluster.aks.name
   }
 }
+
+resource "azuredevops_resource_authorization" "aks" {
+  project_id  = data.azuredevops_project.aks.id
+  resource_id = azuredevops_serviceendpoint_kubernetes.aks.id
+  authorized  = true
+}
