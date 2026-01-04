@@ -1,0 +1,14 @@
+{
+  "name": "simple-rest-api-nodejs",
+  "version": "1.0.0",
+  "description": "A beginner-friendly REST API using Node.js and Express.js to manage books.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Leif Eriksen",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

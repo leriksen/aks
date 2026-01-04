@@ -1,0 +1,220 @@
+{
+  "apiVersion": "2025-10-01",
+  "id": "/subscriptions/2884ad0b-0ac1-4f07-a315-cba72baeec5a/resourceGroups/mdp/providers/microsoft.containerservice/managedClusters/devtest",
+  "name": "devtest",
+  "type": "microsoft.containerservice/managedclusters",
+  "sku": {
+    "name": "Base",
+    "tier": "Free"
+  },
+  "kind": "Base",
+  "location": "australiaeast",
+  "identity": {
+    "type": "SystemAssigned",
+    "principalId": "77ef7e7a-ff9f-4b2f-a7f8-0feb3ae14d0d",
+    "tenantId": "4e5dff48-af2c-4e7e-a5fa-bb6560ec04b6"
+  },
+  "properties": {
+    "provisioningState": "Succeeded",
+    "powerState": {
+      "code": "Running"
+    },
+    "kubernetesVersion": "1.34.1",
+    "currentKubernetesVersion": "1.34.1",
+    "dnsPrefix": "devtest-dns",
+    "fqdn": "devtest-dns-ylllt823.hcp.australiaeast.azmk8s.io",
+    "azurePortalFQDN": "973327744e62931913ff406299b0f09a-priv.portal.hcp.australiaeast.azmk8s.io",
+    "privateFQDN": "devtest-dns-vdc2a5xc.e57b4257-6ab3-487d-9d51-ec76a66c5754.privatelink.australiaeast.azmk8s.io",
+    "agentPoolProfiles": [
+      {
+        "name": "agentpool",
+        "count": 2,
+        "vmSize": "Standard_D2alds_v6",
+        "osDiskSizeGB": 128,
+        "osDiskType": "Managed",
+        "kubeletDiskType": "OS",
+        "vnetSubnetID": "/subscriptions/2884ad0b-0ac1-4f07-a315-cba72baeec5a/resourceGroups/mdp/providers/Microsoft.Network/virtualNetworks/mdp-vnet/subnets/default",
+        "maxPods": 110,
+        "type": "VirtualMachineScaleSets",
+        "availabilityZones": [
+          "1"
+        ],
+        "maxCount": 2,
+        "minCount": 2,
+        "enableAutoScaling": true,
+        "scaleDownMode": "Delete",
+        "provisioningState": "Succeeded",
+        "powerState": {
+          "code": "Running"
+        },
+        "orchestratorVersion": "1.34.1",
+        "currentOrchestratorVersion": "1.34.1",
+        "enableNodePublicIP": false,
+        "mode": "System",
+        "osType": "Linux",
+        "osSKU": "Ubuntu",
+        "nodeImageVersion": "AKSUbuntu-2204gen2containerd-202512.06.0",
+        "upgradeSettings": {
+          "maxSurge": "10%",
+          "maxUnavailable": "0"
+        },
+        "enableFIPS": false,
+        "securityProfile": {
+          "enableVTPM": false,
+          "enableSecureBoot": false
+        },
+        "eTag": "86af8b8f-a3c6-46d1-9aa6-3bef13810722"
+      }
+    ],
+    "windowsProfile": {
+      "adminUsername": "azureuser",
+      "enableCSIProxy": true
+    },
+    "servicePrincipalProfile": {
+      "clientId": "msi"
+    },
+    "addonProfiles": {
+      "azureKeyvaultSecretsProvider": {
+        "enabled": false,
+        "config": null
+      },
+      "azurepolicy": {
+        "enabled": false,
+        "config": null
+      }
+    },
+    "nodeResourceGroup": "MC_mdp_devtest_australiaeast",
+    "enableRBAC": true,
+    "supportPlan": "KubernetesOfficial",
+    "networkProfile": {
+      "networkPlugin": "azure",
+      "networkPluginMode": "overlay",
+      "networkPolicy": "none",
+      "networkDataplane": "azure",
+      "loadBalancerSku": "Standard",
+      "loadBalancerProfile": {
+        "managedOutboundIPs": {
+          "count": 1
+        },
+        "effectiveOutboundIPs": [
+          {
+            "id": "/subscriptions/2884ad0b-0ac1-4f07-a315-cba72baeec5a/resourceGroups/MC_mdp_devtest_australiaeast/providers/Microsoft.Network/publicIPAddresses/eeaf324f-b0a2-4a2b-a5b6-8f25f983bb7f"
+          }
+        ],
+        "backendPoolType": "nodeIPConfiguration"
+      },
+      "podCidr": "10.244.0.0/16",
+      "serviceCidr": "10.0.0.0/16",
+      "dnsServiceIP": "10.0.0.10",
+      "outboundType": "loadBalancer",
+      "podCidrs": [
+        "10.244.0.0/16"
+      ],
+      "serviceCidrs": [
+        "10.0.0.0/16"
+      ],
+      "ipFamilies": [
+        "IPv4"
+      ]
+    },
+    "maxAgentPools": 100,
+    "privateLinkResources": [
+      {
+        "id": "/subscriptions/2884ad0b-0ac1-4f07-a315-cba72baeec5a/resourcegroups/mdp/providers/Microsoft.ContainerService/managedClusters/devtest/privateLinkResources/management",
+        "name": "management",
+        "type": "Microsoft.ContainerService/managedClusters/privateLinkResources",
+        "groupId": "management",
+        "requiredMembers": [
+          "management"
+        ]
+      }
+    ],
+    "apiServerAccessProfile": {
+      "enablePrivateCluster": true,
+      "privateDNSZone": "system",
+      "enablePrivateClusterPublicFQDN": true
+    },
+    "identityProfile": {
+      "kubeletidentity": {
+        "resourceId": "/subscriptions/2884ad0b-0ac1-4f07-a315-cba72baeec5a/resourcegroups/MC_mdp_devtest_australiaeast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/devtest-agentpool",
+        "clientId": "939211b5-6b2d-4851-a013-838b0d8061e7",
+        "objectId": "86101f1d-416b-42b0-88b5-8e879e4652f6"
+      }
+    },
+    "autoScalerProfile": {
+      "balance-similar-node-groups": "false",
+      "daemonset-eviction-for-empty-nodes": false,
+      "daemonset-eviction-for-occupied-nodes": true,
+      "expander": "random",
+      "ignore-daemonsets-utilization": false,
+      "max-empty-bulk-delete": "10",
+      "max-graceful-termination-sec": "600",
+      "max-node-provision-time": "15m",
+      "max-total-unready-percentage": "45",
+      "new-pod-scale-up-delay": "0s",
+      "ok-total-unready-count": "3",
+      "scale-down-delay-after-add": "10m",
+      "scale-down-delay-after-delete": "10s",
+      "scale-down-delay-after-failure": "3m",
+      "scale-down-unneeded-time": "10m",
+      "scale-down-unready-time": "20m",
+      "scale-down-utilization-threshold": "0.5",
+      "scan-interval": "10s",
+      "skip-nodes-with-local-storage": "false",
+      "skip-nodes-with-system-pods": "true"
+    },
+    "autoUpgradeProfile": {
+      "upgradeChannel": "patch",
+      "nodeOSUpgradeChannel": "NodeImage"
+    },
+    "disableLocalAccounts": false,
+    "securityProfile": {
+      "imageCleaner": {
+        "enabled": true,
+        "intervalHours": 168
+      },
+      "workloadIdentity": {
+        "enabled": true
+      }
+    },
+    "storageProfile": {
+      "diskCSIDriver": {
+        "enabled": true
+      },
+      "fileCSIDriver": {
+        "enabled": true
+      },
+      "snapshotController": {
+        "enabled": true
+      }
+    },
+    "oidcIssuerProfile": {
+      "enabled": true,
+      "issuerURL": "https://australiaeast.oic.prod-aks.azure.com/4e5dff48-af2c-4e7e-a5fa-bb6560ec04b6/3fb4fe8e-c39a-4de6-b5b0-a3c064a8fbfd/"
+    },
+    "workloadAutoScalerProfile": {},
+    "azureMonitorProfile": {
+      "metrics": {
+        "enabled": true,
+        "kubeStateMetrics": {
+          "metricLabelsAllowlist": "",
+          "metricAnnotationsAllowList": ""
+        }
+      }
+    },
+    "resourceUID": "69533e761bf1700001bc3329",
+    "metricsProfile": {
+      "costAnalysis": {
+        "enabled": false
+      }
+    },
+    "nodeProvisioningProfile": {
+      "mode": "Manual",
+      "defaultNodePools": "Auto"
+    },
+    "bootstrapProfile": {
+      "artifactSource": "Direct"
+    }
+  },
+  "etag": "b3794d6d-6c1c-4c30-b4a2-d5a710d11c4b"
+}
