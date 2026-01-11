@@ -39,7 +39,12 @@ let books = [
 
 // Home route
 app.get('/', (req, res) => {
-  res.send('📚 Welcome to the Book REST API!');
+    res.send('📚 Welcome to the Book REST API!');
+});
+
+// Version route
+app.get('/version', (req, res) => {
+    res.send('#{Build.BuildId}#');
 });
 
 // GET all books

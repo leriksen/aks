@@ -30,12 +30,14 @@ stages:
           clean: all
         steps:
           - script: |
-              echo "buildId == $(buildId)"
-          - script: |
               # update the pipeline build number
               echo "##vso[build.updatebuildnumber]1.0.$(buildId)"
             condition: always()
             displayName: update build number
+
+          - task: replacetokens@6
+            inputs:
+              sources: applications/books/index.js
 
           - task: Docker@2
             displayName: Login to hub.docker.com
