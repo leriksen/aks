@@ -47,7 +47,7 @@ stages:
             displayName: Build and Push
             inputs:
               command: buildAndPush
-              repository: books # username/contosoRepository for DockerHub
+              repository: leriksen/books # username/contosoRepository for DockerHub
               buildContext: applications/books
               tags: |
                 $(Build.BuildId)
