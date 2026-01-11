@@ -21,7 +21,7 @@ trigger:
 
 variables:
   - name: buildId
-    value: $[ counter('1.0', variables['buildNumber']) ]
+    value: $[ counter('1.0') ]
 stages:
   - stage: docker
     jobs:
