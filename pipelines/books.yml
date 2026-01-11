@@ -29,6 +29,8 @@ stages:
           clean: all
         steps:
           - script: |
+              echo "buildId == $(buildId)"
+          - script: |
               # update the pipeline build number
               echo "##vso[build.updatebuildnumber]$(buildId)"
             condition: always()
