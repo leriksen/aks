@@ -12,9 +12,12 @@ trigger:
       - main
   paths:
     exclude:
-      - pipelines/**/*
-      - terraform/**/*
+      - applications/**/*
+      - helm/**/*
       - modules/**/*
+      - pipelines/**/*
+      - scripts/**/*
+      - terraform/**/*
     include:
       - pipelines/aks.yml
       - pipelines/templates/helm.yml

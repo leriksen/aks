@@ -14,10 +14,15 @@ trigger:
       - master
       - main
   paths:
+    include:
+      - pipelines/infra_deploy_dev.yml
     exclude:
-      - pipelines/aks.yml
-      - pipelines/templates/helm.yml
-      - scripts/helm.sh
+      - applications/**/*
+      - helm/**/*
+      - modules/**/*
+      - pipelines/**/*
+      - scripts/**/*
+      - terraform/**/*
 
 stages:
   - template: ./templates/plan.yml
