@@ -33,7 +33,7 @@ stages:
               echo "buildId == $(buildId)"
           - script: |
               # update the pipeline build number
-              echo "##vso[build.updatebuildnumber]$(buildId)"
+              echo "##vso[build.updatebuildnumber]1.0.$(buildId)"
             condition: always()
             displayName: update build number
 
