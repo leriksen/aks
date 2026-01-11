@@ -33,14 +33,8 @@ stages:
             inputs:
               targetType: 'inline'
               script: |
-                # create new variable holding sum of the two numbers
-                newBuildNumber=$(buildId)
-  
-                # display the sum
-                echo "New Build Number: $newBuildNumber"
-  
                 # update the pipeline build number
-                echo "##vso[build.updatebuildnumber]$newBuildNumber"
+                echo "##vso[build.updatebuildnumber]$(buildId)"
             condition: always()
 
           - task: Docker@2
