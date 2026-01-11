@@ -17,6 +17,7 @@ trigger:
       - terraform/**/*
     include:
       - applications/books
+      - pipelines/books.yml
 
 variables:
   - name: buildId
