@@ -19,10 +19,18 @@ trigger:
       - applications/books
 
 variables:
-  major: 1
-  minor: 0
-  patch: 0
-  buildId: $[counter(format('${0}.${1}', $(major), $(minor)), $(patch))]
+  - name: major
+    type: number
+    value: 1
+  - name: minor
+    type: number
+    value: 0
+  - name: patch
+    type: number
+    value: 0
+  - name: buildId
+    type: string
+    value: $[counter(format('${0}.${1}', $(major), $(minor)), $(patch))]
 
 stages:
   - stage: docker
