@@ -25,7 +25,7 @@ variables:
 stages:
   - stage: docker
     jobs:
-      - jobs: docker
+      - job: docker
         workspace:
           clean: all
         steps:
