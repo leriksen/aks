@@ -2,6 +2,32 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
+const winston = require("winston");
+const logger = winston.createLogger(
+{
+          level: "info",
+          format: winston.format.json(),
+          defaultMeta: {
+            service: 'books'
+          },
+          transports: [
+              new winston.transports.Console(),
+              new winston.transports.File(
+        {
+                  filename: "logs/app.log" }
+              ),
+          ],
+        }
+);
+
+const requestLogger = (req, res, next) => {
+  logger.info(`${req.method} ${req.url}`); // Log the HTTP method and URL
+  next();
+};
+
+// Apply request logging middleware
+app.use(requestLogger);
+
 // Use JSON middleware
 app.use(express.json());
 
@@ -25,6 +51,7 @@ app.get('/books', (req, res) => {
 app.get('/books/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
   const book = books.find(b => b.id === bookId);
+
   if (!book) {
     return res.status(404).json({ error: "Book not found" });
   }
@@ -34,6 +61,7 @@ app.get('/books/:id', (req, res) => {
 // POST new book
 app.post('/books', (req, res) => {
   const { title, author } = req.body;
+
   if (!title || !author) {
     return res.status(400).json({ error: "Title and Author are required" });
   }
