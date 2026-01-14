@@ -28,6 +28,12 @@ const requestLogger = (req, res, next) => {
 // Apply request logging middleware
 app.use(requestLogger);
 
+var favicon = require('serve-favicon')
+var path = require('path')
+
+// Use favicon middleware
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+
 // Use JSON middleware
 app.use(express.json());
 

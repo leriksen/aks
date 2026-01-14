@@ -1,9 +1,12 @@
 FROM node:slim
 
+USER node
+
 WORKDIR /books
 
-COPY package*.json .
-COPY index.js .
+COPY --chown=node:node package*.json .
+COPY --chown=node:node index.js .
+COPY --chown=node:node public public
 
 RUN npm install
 
