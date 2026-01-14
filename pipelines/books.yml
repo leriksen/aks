@@ -51,6 +51,8 @@ stages:
 
           - task: Docker@2
             displayName: Build and Push
+            env:
+              DOCKER_BUILDKIT: 1
             inputs:
               command: buildAndPush
               repository: leriksen/books # username/contosoRepository for DockerHub

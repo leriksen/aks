@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
 
 // Version route
 app.get('/version', (req, res) => {
-    res.send('#{Build.BuildId}#');
+    res.send('#{Build.BuildNumber}#');
 });
 
 // GET all books
