@@ -9,7 +9,6 @@ trigger:
       - main
   paths:
     exclude:
-      - applications/**/*
       - helm/**/*
       - modules/**/*
       - pipelines/**/*
@@ -36,8 +35,8 @@ stages:
             displayName: update build number
 
           - bash: |
-              env
-            displayName: env
+              docker --version
+            displayName: docker version
 
           - task: replacetokens@6
             inputs:
