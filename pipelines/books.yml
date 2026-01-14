@@ -35,6 +35,10 @@ stages:
             condition: always()
             displayName: update build number
 
+          - bash: |
+              env
+            displayName: env
+
           - task: replacetokens@6
             inputs:
               sources: applications/books/index.js
