@@ -57,5 +57,5 @@ stages:
               repository: leriksen/books # username/contosoRepository for DockerHub
               buildContext: applications/books
               tags: |
-                $(Build.BuildId)
+                $(Build.BuildNumber)
                 latest
