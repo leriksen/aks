@@ -15,6 +15,12 @@ resource "azurerm_role_assignment" "kv_secret_officer" {
   role_definition_name = "Key Vault Secrets Officer"
 }
 
+resource "azurerm_role_assignment" "kv_secret_user" {
+  principal_id         = module.environment.k8s_secret_reader_principal
+  scope                = azurerm_key_vault.kv.id
+  role_definition_name = "Key Vault Secrets User"
+}
+
 resource "azurerm_key_vault_secret" "pod1secret" {
   depends_on = [
     azurerm_role_assignment.kv_secret_officer

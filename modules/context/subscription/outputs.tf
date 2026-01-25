@@ -15,3 +15,6 @@ output "as_string" {
   value = local.as_string[var.subscription]
 }
 
+output "id" {
+  value = local.id[var.subscription]
+}

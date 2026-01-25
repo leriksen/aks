@@ -8,3 +8,5 @@ export ARM_CLIENT_ID="$(cat .client_id_dev)"
 export ARM_CLIENT_SECRET="$(cat .key_${env})"
 export ARM_SUBSCRIPTION_ID="$(cat .subscription_id)"
 export ARM_TENANT_ID="$(cat .tenant_id)"
+
+az login
