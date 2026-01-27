@@ -25,11 +25,21 @@ const requestLogger = (req, res, next) => {
   next();
 };
 
+const fs = require('fs');
+const path = require('path'); // To resolve file paths
+
+const filePath = path.join('/', 'data', 'books', 'books.json');
+
+// Read the file as a string
+const jsonData = fs.readFileSync(filePath, 'utf8');
+
+// Parse the JSON string into a JavaScript object
+let books = JSON.parse(jsonData);
+
 // Apply request logging middleware
 app.use(requestLogger);
 
 const favicon = require('serve-favicon')
-const path = require('path')
 
 // Use favicon middleware
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
@@ -38,10 +48,10 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(express.json());
 
 // In-memory books data
-let books = [
-  { id: 1, title: "Atomic Habits", author: "James Clear" },
-  { id: 2, title: "The Alchemist", author: "Paulo Coelho" }
-];
+// let books = [
+//   { id: 1, title: "Atomic Habits", author: "James Clear" },
+//   { id: 2, title: "The Alchemist", author: "Paulo Coelho" }
+// ];
 
 // Home route
 app.get('/', (req, res) => {
@@ -120,5 +130,6 @@ app.delete('/books/:id', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
+  console.log(JSON.stringify(books, null, 2));
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
