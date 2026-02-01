@@ -2,41 +2,35 @@ const express = require('express');
 const app = express();
 
 require('dotenv').config();
-const PORT = parseInt(process.env.PORT) || 2000;
+const PORT = parseInt(process.env.PORT) || 3000;
 
 const winston = require("winston");
 const logger = winston.createLogger(
-{
-          level: "info",
-          format: winston.format.json(),
-          defaultMeta: {
+    {
+        level: "info",
+        format: winston.format.json(),
+        defaultMeta: {
             service: 'books'
-          },
-          transports: [
-              new winston.transports.Console(),
-              new winston.transports.File(
-        {
-                  filename: "logs/app.log" }
-              ),
-          ],
-        }
+        },
+        transports: [
+            new winston.transports.Console(),
+            new winston.transports.File(
+                {
+                    filename: "logs/app.log" }
+            ),
+        ],
+    }
 );
 
 const requestLogger = (req, res, next) => {
-  logger.info(`${req.method} ${req.url}`); // Log the HTTP method and URL
-  next();
+    logger.info(`${req.method} ${req.url}`); // Log the HTTP method and URL
+    next();
 };
 
 const fs = require('fs');
 const path = require('path'); // To resolve file paths
 
-const filePath = path.join('/', 'data', 'books', 'books.json');
-
-// Read the file as a string
-const jsonData = fs.readFileSync(filePath, 'utf8');
-
-// Parse the JSON string into a JavaScript object
-let books = JSON.parse(jsonData);
+const data_path = process.env.DATAPATH || path.join('/', 'var', 'data', 'books.json');
 
 // Apply request logging middleware
 app.use(requestLogger);
@@ -48,12 +42,6 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 // Use JSON middleware
 app.use(express.json());
-
-// In-memory books data
-// let books = [
-//   { id: 1, title: "Atomic Habits", author: "James Clear" },
-//   { id: 2, title: "The Alchemist", author: "Paulo Coelho" }
-// ];
 
 // Home route
 app.get('/', (req, res) => {
@@ -67,12 +55,15 @@ app.get('/version', (req, res) => {
 
 // GET all books
 app.get('/books', (req, res) => {
-  res.json(books);
+    res.json(load_json_file(data_path));
 });
 
 // GET book by ID
 app.get('/books/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
+
+  const books = load_json_file(data_path);
+
   const book = books.find(b => b.id === bookId);
 
   if (!book) {
@@ -89,6 +80,8 @@ app.post('/books', (req, res) => {
     return res.status(400).json({ error: "Title and Author are required" });
   }
 
+  const books = load_json_file(data_path);
+
   const newBook = {
     id: books.length + 1,
     title,
@@ -96,6 +89,9 @@ app.post('/books', (req, res) => {
   };
 
   books.push(newBook);
+
+  write_json_file(books, data_path)
+
   res.status(201).json(newBook);
 });
 
@@ -103,6 +99,8 @@ app.post('/books', (req, res) => {
 app.put('/books/:id', (req, res) => {
   const bookId = parseInt(req.params.id);
   const { title, author } = req.body;
+  const books = load_json_file(data_path);
+
   const bookIndex = books.findIndex(b => b.id === bookId);
 
   if (bookIndex === -1) {
@@ -114,6 +112,9 @@ app.put('/books/:id', (req, res) => {
   }
 
   books[bookIndex] = { id: bookId, title, author };
+
+  write_json_file(books, data_path)
+
   res.json(books[bookIndex]);
 });
 
@@ -127,11 +128,22 @@ app.delete('/books/:id', (req, res) => {
   }
 
   books = books.filter(b => b.id !== bookId);
+
+  write_json_file(books, data_path)
+
   res.json({ message: "Book deleted successfully" });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(JSON.stringify(books, null, 2));
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
+
+function load_json_file(filepath) {
+    let content = fs.readFileSync(filepath, 'utf8');
+    return JSON.parse(content);
+}
+
+function write_json_file(json, filepath) {
+    fs.writeFileSync(filepath, JSON.stringify(json, null, 2));
+}
