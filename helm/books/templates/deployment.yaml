@@ -24,3 +24,10 @@ spec:
             - name: http
               containerPort: {{ .Values.pod.port }}
               protocol: TCP
+          volumeMounts:
+            - mountPath: /data/books
+              name: local-sc-pvc
+      volumes:
+        - name: local-sc-pvc
+          persistentVolumeClaim:
+            claimName: local-sc-pvc

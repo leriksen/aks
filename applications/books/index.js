@@ -30,7 +30,7 @@ const requestLogger = (req, res, next) => {
 const fs = require('fs');
 const path = require('path'); // To resolve file paths
 
-const data_path = process.env.DATAPATH || path.join('/', 'var', 'data', 'books.json');
+const data_path = process.env.DATAPATH || path.join('/', 'data', 'books', 'books.json');
 
 // Apply request logging middleware
 app.use(requestLogger);
