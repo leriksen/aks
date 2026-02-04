@@ -10,8 +10,6 @@ COPY --chown=node:node public public
 
 RUN npm install
 
-RUN mkdir -p data/books
-
 CMD ["node", "index.js"]
 
 EXPOSE 3000
