@@ -45,7 +45,7 @@ app.use(express.json());
 
 // Home route
 app.get('/', (req, res) => {
-    res.send('📚 Welcome to the Book REST API!');
+    res.send(`📚 Welcome to the Book REST API! #{Build.BuildNumber}# ${PORT} ${data_path}`);
 });
 
 // Version route
@@ -136,7 +136,7 @@ app.delete('/books/:id', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT} #{Build.BuildNumber}# ${data_path}`);
 });
 
 function load_json_file(filepath) {
