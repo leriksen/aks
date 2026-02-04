@@ -1,28 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "books.fullname" . }}
+  name: books
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: 1
   selector:
     matchLabels:
-      {{- include "books.selectorLabels" . | nindent 6 }}
+      app: books
   template:
     metadata:
       labels:
-        {{- include "books.labels" . | nindent 8 }}
-        {{- with .Values.podLabels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
+        app: books
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        - name: books
+          image: leriksen/books:latest
           ports:
             - name: http
-              containerPort: {{ .Values.pod.port }}
+              containerPort: 3000
               protocol: TCP
           volumeMounts:
             - mountPath: /data/books
@@ -31,3 +26,6 @@ spec:
         - name: local-sc-pvc
           persistentVolumeClaim:
             claimName: local-sc-pvc
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
