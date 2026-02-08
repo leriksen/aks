@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: book-config
+data:
+  PORT:      "{{ .Values.pod.image_port }}"
+  DATA_PATH: "{{ .Values.pod.data_path  }}"

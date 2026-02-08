@@ -14,7 +14,9 @@ service:
   port: 5000
 
 pod:
-  port: 3000
+  port: 6000
+  image_port: 6000
+  data_path: /data/books
 
 selectorLabels:
   app: books

@@ -50,9 +50,13 @@ app.get('/', (req, res) => {
 
 // Version route
 app.get('/version', (req, res) => {
-    res.send('#{Build.BuildNumber}#');
+  res.send('#{Build.BuildNumber}#');
 });
 
+// Ports route
+app.get('/debug', (req, res) => {
+  res.send('#{DATA_PATH}# #{PORT}# ');
+});
 // GET all books
 app.get('/books', (req, res) => {
     res.json(load_json_file(data_path));
