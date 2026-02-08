@@ -55,7 +55,7 @@ app.get('/version', (req, res) => {
 
 // Ports route
 app.get('/debug', (req, res) => {
-  res.send('#{DATA_PATH}# #{PORT}# ');
+  res.send(`${data_path} ${PORT}`);
 });
 // GET all books
 app.get('/books', (req, res) => {

@@ -7,9 +7,12 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 5000
-      targetPort: 3000
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.pod.port }}
       protocol: TCP
       name: http
   selector:
-    app: books
+    {{- include "books.labels" . | nindent 8 }}
+    {{- with .Values.podLabels }}
+    {{- toYaml . | nindent 8 }}
+    {{- end }}
