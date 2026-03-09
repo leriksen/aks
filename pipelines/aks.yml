@@ -21,7 +21,7 @@ trigger:
     include:
       - pipelines/aks.yml
       - pipelines/templates/helm.yml
-      - scripts/helm.sh
+      - scripts/helm-install-secret-store-csi-driver.sh
 
 stages:
   - template: ./templates/helm.yml

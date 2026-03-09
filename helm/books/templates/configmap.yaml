@@ -5,4 +5,3 @@ metadata:
 data:
   PORT:      "{{ .Values.pod.image_port }}"
   DATA_PATH: "{{ .Values.pod.data_path  }}"
-  FROM_HELM: "{{ .Values.static.prove_helm }}"
